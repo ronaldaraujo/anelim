@@ -1,6 +1,6 @@
 {
 	"users": {
-		"number_lines": "100",
+		"number_lines": "10",
 		"columns": {
 			"id": "int|pk|not_null",
 			"name": "varchar|255|not_null",
