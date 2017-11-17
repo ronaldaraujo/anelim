@@ -1,0 +1,22 @@
+{
+	"users": {
+		"number_lines": "100",
+		"columns": {
+			"id": "int|pk|not_null",
+			"name": "varchar|255|not_null",
+			"email": "varchar|255|not_null",
+			"phone": "varchar|255|not_null",
+			"address": "varchar|255|is_null"
+		}
+	},
+	"users2": {
+		"number_lines": "100",
+		"columns": {
+			"id": "int|pk|not_null",
+			"name": "varchar|255|not_null",
+			"email": "varchar|255|not_null",
+			"phone": "varchar|255|not_null",
+			"address": "varchar|255|is_null"
+		}
+	}
+}
