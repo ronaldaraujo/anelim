@@ -1,0 +1,24 @@
+{
+  "tables": [
+    {
+      "number_inserts": 10,
+      "name": "produto",
+      "fields": [
+        {
+          "name": "id",
+          "primary_key": true,
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": false,
+          "null": false
+        },
+        {
+          "name": "nome",
+          "type": "varchar",
+          "constraint": 255,
+          "null": false
+        }
+      ]
+    }
+  ]
+}
