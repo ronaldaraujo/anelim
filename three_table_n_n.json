@@ -1,0 +1,117 @@
+{
+  "tables": [
+    {
+      "number_inserts": 20,
+      "name": "users",
+      "fields": [
+        {
+          "name": "id",
+          "primary_key": true,
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": false,
+          "null": false
+        },
+        {
+          "name": "nome",
+          "type": "varchar",
+          "constraint": 12,
+          "null": false
+        }
+      ]
+    },
+    {
+      "number_inserts": 1,
+      "name": "products",
+      "fields": [
+        {
+          "name": "id",
+          "primary_key": true,
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": true,
+          "null": false
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "constraint": 12,
+          "null": false
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "constraint": 100,
+          "null": true
+        },
+        {
+          "name": "quantity",
+          "type": "smallint",
+          "constraint": 2,
+          "null": true
+        }
+      ]
+    },
+    {
+      "number_inserts": 2,
+      "name": "orders",
+      "fields": [
+        {
+          "name": "id",
+          "primary_key": true,
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": true,
+          "null": false
+        },
+        {
+          "name": "fk_user",
+          "foreign_key": true,
+          "reference_table": "users",
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": true,
+          "null": false
+        },
+        {
+          "name": "date_ordered",
+          "type": "date",
+          "constraint": 18,
+          "null": false
+        }
+      ]
+    },
+    {
+      "number_inserts": 1,
+      "name": "order_details",
+      "fields": [
+        {
+          "name": "id",
+          "primary_key": true,
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": true,
+          "null": false
+        },
+        {
+          "name": "fk_orders",
+          "foreign_key": true,
+          "reference_table": "orders",
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": true,
+          "null": false
+        },
+        {
+          "name": "fk_products",
+          "foreign_key": true,
+          "reference_table": "products",
+          "type": "integer",
+          "constraint": 8,
+          "unsigned": true,
+          "null": false
+        }
+      ]
+    }
+  ]
+}

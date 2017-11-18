@@ -46,3 +46,13 @@
 [2017-11-18 12:58:05] -> ERROR -> local variable 'pks' referenced before assignment
 [2017-11-18 12:58:42] -> ERROR -> local variable 'pks' referenced before assignment
 [2017-11-18 12:58:57] -> ERROR -> local variable 'pks' referenced before assignment
+[2017-11-18 13:10:55] -> ERROR -> local variable 'last_id' referenced before assignment
+[2017-11-18 13:15:26] -> ERROR -> local variable 'last_id' referenced before assignment
+[2017-11-18 13:15:51] -> ERROR -> local variable 'last_id' referenced before assignment
+[2017-11-18 13:16:09] -> ERROR -> 'NoneType' object does not support item assignment
+[2017-11-18 13:25:20] -> ERROR -> local variable 'last_id' referenced before assignment
+[2017-11-18 13:28:02] -> ERROR -> generate_data() takes no arguments (1 given)
+[2017-11-18 13:30:57] -> ERROR -> [Errno 2] No such file or directory: 'one_table_1_1.json'
+[2017-11-18 13:39:54] -> ERROR -> No JSON object could be decoded
+[2017-11-18 13:40:00] -> ERROR -> Expecting , delimiter: line 15 column 9 (char 285)
+[2017-11-18 13:42:39] -> ERROR -> 'reference_table'

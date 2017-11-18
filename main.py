@@ -117,7 +117,13 @@ class Postgres(object):
 
         if self._is_foreign_key == True:
             res = self.get_and_remove_item(pks, self._reference_table)
-            return res
+            
+            # Hack to table with relationship 1_n
+            if res != None:
+                last_id.append(res)
+                return res
+            else:
+                return last_id[0]
 
         fake = faker.Faker()
 
@@ -343,9 +349,10 @@ class JsonObject(object):
 
 version = '1.0.0'
 
-global pks, new_pks, fks
+global pks, new_pks, fks, last_id
 
 pks = list()
+last_id = list()
 
 
 def main():
