@@ -1,7 +1,7 @@
 {
   "tables": [
     {
-      "number_inserts": 20,
+      "number_inserts": 1,
       "name": "users",
       "fields": [
         {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "number_inserts": 1,
+      "number_inserts": 4,
       "name": "products",
       "fields": [
         {
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "number_inserts": 2,
+      "number_inserts": 10,
       "name": "orders",
       "fields": [
         {
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "number_inserts": 1,
+      "number_inserts": 10,
       "name": "order_details",
       "fields": [
         {

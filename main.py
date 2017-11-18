@@ -437,13 +437,6 @@ def main():
 
             target.close()
 
-            # TODO: obter item do array por chave
-
-            # teste = [('users', 'id', 664), ('users', 'id', 888), ('ronald', 'id', 999)]
-            # print list(get_item(teste, 'users'))
-
-            # print pks
-
         elif args.target == 'mysql':
             db = MySQL()
         else:
