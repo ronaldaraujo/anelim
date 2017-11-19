@@ -64,3 +64,8 @@
 [2017-11-19 17:51:58] -> ERROR -> tuple index out of range
 [2017-11-19 17:52:05] -> ERROR -> tuple indices must be integers, not unicode
 [2017-11-19 18:30:23] -> ERROR -> local variable 'g_some_list_aux' referenced before assignment
+[2017-11-19 18:42:22] -> ERROR -> 'Namespace' object has no attribute 'V'
+[2017-11-19 18:42:34] -> ERROR -> 'Namespace' object has no attribute 'V'
+[2017-11-19 18:48:08] -> ERROR -> 'Namespace' object has no attribute 'c'
+[2017-11-19 18:54:17] -> ERROR -> 'Namespace' object has no attribute 'c'
+[2017-11-19 19:04:54] -> ERROR -> object of type 'bool' has no len()

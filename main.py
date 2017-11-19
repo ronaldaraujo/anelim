@@ -129,7 +129,7 @@ class Postgres(object):
 
         if self._is_foreign_key == True:
             res = self.get_item_randomly(pks, self._reference_table)
-            
+
             # Hack to table with relationship 1_n
             if res != None:
                 last_id.append(res)
@@ -375,25 +375,19 @@ def main():
 
         args = argparse.ArgumentParser(
             description='Arguments')
-        args.add_argument('-s', '--size', type=int, default=100,
-                          help='scale to size')
         args.add_argument('-t', '--target', default='postgresql',
                           help='generate for this engine')
-        args.add_argument('--drop', action='store_true', default=False,
+        args.add_argument('-c', '--create_tables', default=False,
+                          help='create tables before reloading')
+        args.add_argument('-d', '--drop', default=False,
                           help='drop tables before reloading')
-        args.add_argument('-d', '--debug', action='count',
+        args.add_argument('--debug',
                           help='set debug mode')
-        args.add_argument('-V', action='store_true', default=False,
-                          help='show short version on stdout and exit')
         args.add_argument('-v', '--version', action='version',
                           version="version %s" % version,
                           help='show version information')
         args.add_argument("-f", "--file", type=str)
         args = args.parse_args()
-
-        if args.V:
-            print(version)
-            sys.exit(0)
 
         if args.file:
             data = JsonObject(open(args.file).read())
@@ -410,6 +404,16 @@ def main():
             target.truncate()
 
             for table in data.tables:
+
+                # Create tables if exist flag -c or --create_tables
+                if args.create_tables and len(args.create_tables) != 0:
+                    print 'aqui'
+                    sb.append("CREATE TABLE %s" % table['name'])
+
+                    target.write(sb.to_string())
+                    target.write("\n")
+
+                sb.clear()
 
                 for _ in xrange(1, table['number_inserts'] + 1):
 
