@@ -1,7 +1,7 @@
 {
   "tables": [
     {
-      "number_inserts": 1,
+      "number_inserts": 2,
       "name": "users",
       "fields": [
         {

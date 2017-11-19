@@ -21,7 +21,7 @@
       ]
     },
     {
-      "number_inserts": 4,
+      "number_inserts": 2,
       "name": "products",
       "fields": [
         {
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "number_inserts": 10,
+      "number_inserts": 2,
       "name": "orders",
       "fields": [
         {
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "number_inserts": 10,
+      "number_inserts": 5,
       "name": "order_details",
       "fields": [
         {

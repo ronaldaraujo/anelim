@@ -102,6 +102,18 @@ class Postgres(object):
 
         return res
 
+    def get_item_randomly(self, some_list, reference_table):
+        res = None
+        some_list_aux = list()
+
+        del g_some_list_aux[:]
+
+        for table_name, collumn, collumn_value in some_list:
+            if table_name == reference_table:
+                g_some_list_aux.append((table_name, collumn, collumn_value))
+
+        return random.choice(g_some_list_aux)[2]
+
     def datatype_is_supported(self):
         if self._type not in self._supported_types and self._is_nullable == False:
             raise ValueError(
@@ -116,7 +128,7 @@ class Postgres(object):
     def generate_data(self):
 
         if self._is_foreign_key == True:
-            res = self.get_and_remove_item(pks, self._reference_table)
+            res = self.get_item_randomly(pks, self._reference_table)
             
             # Hack to table with relationship 1_n
             if res != None:
@@ -349,10 +361,11 @@ class JsonObject(object):
 
 version = '1.0.0'
 
-global pks, new_pks, fks, last_id
+global pks, new_pks, fks, last_id, g_some_list_aux
 
 pks = list()
 last_id = list()
+g_some_list_aux = list()
 
 
 def main():

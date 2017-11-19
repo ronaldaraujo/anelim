@@ -56,3 +56,11 @@
 [2017-11-18 13:39:54] -> ERROR -> No JSON object could be decoded
 [2017-11-18 13:40:00] -> ERROR -> Expecting , delimiter: line 15 column 9 (char 285)
 [2017-11-18 13:42:39] -> ERROR -> 'reference_table'
+[2017-11-19 17:47:49] -> ERROR -> list index out of range
+[2017-11-19 17:47:54] -> ERROR -> list index out of range
+[2017-11-19 17:47:57] -> ERROR -> list index out of range
+[2017-11-19 17:48:07] -> ERROR -> list index out of range
+[2017-11-19 17:50:42] -> ERROR -> [Errno 2] No such file or directory: 'two_table_n_n.json'
+[2017-11-19 17:51:58] -> ERROR -> tuple index out of range
+[2017-11-19 17:52:05] -> ERROR -> tuple indices must be integers, not unicode
+[2017-11-19 18:30:23] -> ERROR -> local variable 'g_some_list_aux' referenced before assignment
