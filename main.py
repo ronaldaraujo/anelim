@@ -407,8 +407,32 @@ def main():
 
                 # Create tables if exist flag -c or --create_tables
                 if args.create_tables and len(args.create_tables) != 0:
-                    print 'aqui'
-                    sb.append("CREATE TABLE %s" % table['name'])
+                    sb.append("CREATE TABLE %s" % table['name'] + "(")
+                    
+                    target.write("\n")
+
+                    for field in table['fields']:
+                        sb.append("\n    " + field['name'] + " " + field['type'].upper())
+                        
+                        if 'constraint' in field:
+                            sb.append("(%s)" % field['constraint'])
+
+                        if 'null' in field and field['null']:
+                            sb.append(" NOT NULL")
+
+                        if 'primary_key' in field:
+                            sb.append(" PRIMARY KEY")
+
+                        if 'unsigned' in field and field['unsigned']:
+                            sb.append(" CHECK (" + field['name'] + ">=0)")
+
+                        sb.append(",")
+
+                    _sb = sb.to_string()[:-1]
+                    sb.clear()
+                    sb.append(_sb)
+
+                    sb.append("\n);")
 
                     target.write(sb.to_string())
                     target.write("\n")
@@ -442,7 +466,7 @@ def main():
                     _sb = sb.to_string()[:-1]
                     sb.clear()
                     sb.append(_sb)
-                    sb.append(")")
+                    sb.append(");")
 
                     # print sb
 

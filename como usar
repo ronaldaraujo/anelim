@@ -1,0 +1,12 @@
+como usar 
+
+$ sudo apt-get install python-virtualenv
+
+$ sudo easy_install virtualenv
+
+$ sudo pip install virtualenv
+
+http://www.pythonforbeginners.com/basics/how-to-use-python-virtualenv
+
+pip freeze > requirements.txt
+pip install -r requirements.txt

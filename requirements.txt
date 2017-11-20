@@ -1,0 +1,6 @@
+Faker==0.8.7
+ipaddress==1.0.18
+pkg-resources==0.0.0
+python-dateutil==2.6.1
+six==1.11.0
+text-unidecode==1.1

@@ -8,8 +8,7 @@
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
-          "unsigned": false,
+          "unsigned": true,
           "null": false
         },
         {
@@ -28,7 +27,6 @@
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },
@@ -47,7 +45,6 @@
         {
           "name": "quantity",
           "type": "smallint",
-          "constraint": 2,
           "null": true
         }
       ]
@@ -60,7 +57,6 @@
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },
@@ -69,14 +65,12 @@
           "foreign_key": true,
           "reference_table": "users",
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },
         {
           "name": "date_ordered",
           "type": "date",
-          "constraint": 18,
           "null": false
         }
       ]
@@ -89,7 +83,6 @@
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },
@@ -98,7 +91,6 @@
           "foreign_key": true,
           "reference_table": "orders",
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },
@@ -107,7 +99,6 @@
           "foreign_key": true,
           "reference_table": "products",
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         }
