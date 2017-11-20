@@ -8,6 +8,7 @@ import faker
 import argparse
 from random import randint
 from cStringIO import StringIO
+from time import gmtime, strftime
 
 
 class StringBuilder:
@@ -351,22 +352,28 @@ def get_item(someList, value):
         if x == value:
             yield x, y, z
 
+def set_header_information(sb):
+    sb.append("-- Anelim.py - Version: " + version + "\n")
+    sb.append("-- Script generated on " + strftime("%a, %d %b %Y %X", gmtime()) + "\n")
+    sb.append("\n")
+
+
 
 class JsonObject(object):
-
     def __init__(self, json_content):
         data = json.loads(json_content)
         for key, value in data.items():
             self.__dict__[key] = value
 
+
+global pks, new_pks, fks, last_id, g_some_list_aux, version
+
 version = '1.0.0'
-
-global pks, new_pks, fks, last_id, g_some_list_aux
-
 pks = list()
 last_id = list()
 g_some_list_aux = list()
 
+POSTGRES = "postgre.sql"
 
 def main():
     try:
@@ -375,9 +382,11 @@ def main():
 
         args = argparse.ArgumentParser(
             description='Arguments')
+        args.add_argument('-n', '--name_file', default=POSTGRES,
+                          help='generate for this engine')
         args.add_argument('-t', '--target', default='postgresql',
                           help='generate for this engine')
-        args.add_argument('-c', '--create_tables', default=False,
+        args.add_argument('-c', '--create', default=False,
                           help='create tables before reloading')
         args.add_argument('-d', '--drop', default=False,
                           help='drop tables before reloading')
@@ -403,10 +412,18 @@ def main():
             target = open('postgres.sql', 'w')
             target.truncate()
 
+            set_header_information(sb)
+
+            # Delete all tables if exist flag -d or --drop
+            if args.create and len(args.create) != 0:
+                sb.append("DROP SCHEMA PUBLIC CASCADE;\n")
+                sb.append("CREATE SCHEMA PUBLIC;\n\n")
+
             for table in data.tables:
 
-                # Create tables if exist flag -c or --create_tables
-                if args.create_tables and len(args.create_tables) != 0:
+                # Create tables if exist flag -c or --create
+                if args.create and len(args.create) != 0:
+
                     sb.append("CREATE TABLE %s" % table['name'] + "(")
                     
                     target.write("\n")
@@ -422,6 +439,9 @@ def main():
 
                         if 'primary_key' in field:
                             sb.append(" PRIMARY KEY")
+
+                        if 'foreign_key' in field:
+                            sb.append(" REFERENCES %s" % field['reference_table'])
 
                         if 'unsigned' in field and field['unsigned']:
                             sb.append(" CHECK (" + field['name'] + ">=0)")
