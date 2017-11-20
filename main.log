@@ -81,3 +81,16 @@ LINE 2:     id INTEGER PRIMARY KEY CHEC (id>=0),
                                    ^
 
 [2017-11-20 15:01:36] -> ERROR -> 'psycopg2.extensions.cursor' object has no attribute 'commit'
+[2017-11-20 15:31:05] -> ERROR -> cannot concatenate 'str' and 'int' objects
+[2017-11-20 15:31:54] -> ERROR -> cannot concatenate 'str' and 'int' objects
+[2017-11-20 15:32:31] -> ERROR -> cannot concatenate 'str' and 'int' objects
+[2017-11-20 15:32:35] -> ERROR -> global name 'l' is not defined
+[2017-11-20 15:35:40] -> ERROR -> cannot concatenate 'str' and 'int' objects
+[2017-11-20 15:37:06] -> ERROR -> local variable 'g_bar' referenced before assignment
+[2017-11-20 16:33:19] -> ERROR -> global name 'system' is not defined
+[2017-11-20 16:41:32] -> ERROR -> global name 'l' is not defined
+[2017-11-20 16:45:59] -> ERROR -> local variable 'bar' referenced before assignment
+[2017-11-20 16:47:20] -> ERROR -> syntax error at or near "("
+LINE 2:     id INTEGER(8) PRIMARY KEY,
+                      ^
+

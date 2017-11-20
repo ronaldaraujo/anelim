@@ -1,14 +1,13 @@
 {
   "tables": [
     {
-      "number_inserts": 10,
-      "name": "produto",
+      "number_inserts": 1000,
+      "name": "products",
       "fields": [
         {
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
           "unsigned": false,
           "null": false
         },

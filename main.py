@@ -6,11 +6,11 @@ import random
 import string
 import faker
 import argparse
+import psycopg2
 from random import randint
 from cStringIO import StringIO
 from time import gmtime, strftime
-import psycopg2
-
+from os import system
 
 class StringBuilder:
     _value = None
@@ -347,6 +347,33 @@ class Postgres(object):
 
             return res
 
+# Print iterations progress
+
+
+def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='#'):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 *
+                                                     (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+
+    system('clear')
+
+    print "\r%s |%s| %s%% %s" % (prefix, bar, percent, suffix)
+    
+    # Print New Line on Complete
+    if iteration == total:
+        print ""
 
 def get_item(someList, value):
     for x, y, z in someList:
@@ -400,7 +427,7 @@ def main():
                           help='create tables before reloading')
         args.add_argument('-d', '--drop', default=False,
                           help='drop tables before reloading')
-        args.add_argument('--debug', default=True,
+        args.add_argument('--debug', default=False,
                           help='set debug mode')
         args.add_argument('-v', '--version', action='version',
                           version="version %s" % version,
@@ -471,6 +498,11 @@ def main():
 
                 sb.clear()
 
+            if not args.debug:
+                l = len(data.tables)
+                bar = 0
+                print_progress_bar(bar, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+
             for table in data.tables:
 
                 # Create tables if exist flag -c or --create
@@ -515,12 +547,18 @@ def main():
 
                     if args.debug:
                         print "\nCreate table %s" % table['name']
-                    
+
                     cur.execute(sb.to_string())
 
                 sb.clear()
 
+                len_number_inserts = table['number_inserts']
+
                 for _ in xrange(1, table['number_inserts'] + 1):
+
+                    if not args.debug and bar <= len_number_inserts:
+                        bar = bar + 1
+                        print_progress_bar(bar, len_number_inserts, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
                     sb.append("INSERT INTO %s(" % table['name'])
 
@@ -550,9 +588,11 @@ def main():
                     sb.append(");")
 
                     if args.insert:
-                        cur.execute(sb.to_string())
 
-                    # print sb
+                        if args.debug:
+                            print sb
+
+                        cur.execute(sb.to_string())
 
                     target.write(sb.to_string())
                     target.write("\n")
