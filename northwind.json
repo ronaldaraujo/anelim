@@ -174,32 +174,107 @@
         },
 		{
 	      "number_inserts": 1,
-	      "name": "Orders",
+	      "name": "Employees",
 	      "fields": [
 	        {
-	          "name": "OrderID",
+	          "name": "EmployeeID",
 	          "primary_key": true,
-	          "reference_table": "Suppliers",
 	          "type": "integer",
 	          "unsigned": true,
 	          "null": false
 	        },
 	        {
-	          "name": "CategoryName",
+	          "name": "LastName",
+	          "type": "varchar",
+	          "constraint": 50,
+	          "null": true
+	        },
+	        {
+	          "name": "FirstName",
+	          "type": "varchar",
+	          "constraint": 50,
+	          "null": false
+	        },
+	        {
+	          "name": "Title",
+	          "type": "varchar",
+	          "constraint": 100,
+	          "null": false
+	        },
+	        {
+	          "name": "TitleOfCourtesy",
+	          "type": "varchar",
+	          "constraint": 100,
+	          "null": true
+	        },
+	        {
+	          "name": "BirthDate",
+	          "type": "date",
+	          "null": false
+	        },
+	        {
+	          "name": "HireDate",
+	          "type": "date",
+	          "null": true
+	        },
+	        {
+	          "name": "Address",
 	          "type": "varchar",
 	          "constraint": 255,
 	          "null": false
 	        },
 	        {
-	          "name": "Description",
+	          "name": "City",
+	          "type": "varchar",
+	          "constraint": 150,
+	          "null": false
+	        },
+	        {
+	          "name": "Region",
+	          "type": "varchar",
+	          "constraint": 100,
+	          "null": false
+	        },
+	        {
+	          "name": "PostalCode",
+	          "type": "varchar",
+	          "constraint": 20,
+	          "null": false
+	        },
+	        {
+	          "name": "Country",
+	          "type": "varchar",
+	          "constraint": 120,
+	          "null": false
+	        },
+	        {
+	          "name": "HomePhone",
+	          "type": "varchar",
+	          "constraint": 15,
+	          "null": true
+	        },
+	        {
+	          "name": "Extension",
+	          "type": "varchar",
+	          "constraint": 25,
+	          "null": true
+	        },
+	        {
+	          "name": "Photo",
+	          "type": "varchar",
+	          "constraint": 50,
+	          "null": true
+	        },
+	        {
+	          "name": "Notes",
 	          "type": "varchar",
 	          "constraint": 255,
 	          "null": true
 	        },
 	        {
-	          "name": "Picture",
+	          "name": "ReportsTo",
 	          "type": "varchar",
-	          "constraint": 100,
+	          "constraint": 50,
 	          "null": true
 	        }
 	      ]
