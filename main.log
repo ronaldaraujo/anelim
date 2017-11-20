@@ -71,3 +71,13 @@
 [2017-11-19 19:04:54] -> ERROR -> object of type 'bool' has no len()
 [2017-11-20 10:24:22] -> ERROR -> [Errno 2] No such file or directory: 'schema.json'
 [2017-11-20 11:08:45] -> ERROR -> cannot concatenate 'str' and 'int' objects
+[2017-11-20 14:25:05] -> ERROR -> global name 'POSTGRES' is not defined
+[2017-11-20 14:25:47] -> ERROR -> [Errno 2] No such file or directory: 'ile_name=oi'
+[2017-11-20 14:42:38] -> ERROR -> 'JsonObject' object has no attribute 'tables'
+[2017-11-20 14:43:34] -> ERROR -> 'JsonObject' object has no attribute 'tables'
+[2017-11-20 14:44:10] -> ERROR -> 'str' object has no attribute 'tables'
+[2017-11-20 15:00:42] -> ERROR -> syntax error at or near "CHEC"
+LINE 2:     id INTEGER PRIMARY KEY CHEC (id>=0),
+                                   ^
+
+[2017-11-20 15:01:36] -> ERROR -> 'psycopg2.extensions.cursor' object has no attribute 'commit'

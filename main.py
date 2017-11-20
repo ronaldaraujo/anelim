@@ -9,6 +9,7 @@ import argparse
 from random import randint
 from cStringIO import StringIO
 from time import gmtime, strftime
+import psycopg2
 
 
 class StringBuilder:
@@ -352,14 +353,20 @@ def get_item(someList, value):
         if x == value:
             yield x, y, z
 
-def set_header_information(sb):
+
+def set_header_information(sb, target):
     sb.append("-- Anelim.py - Version: " + version + "\n")
-    sb.append("-- Script generated on " + strftime("%a, %d %b %Y %X", gmtime()) + "\n")
+    sb.append("-- Script generated on " +
+              strftime("%a, %d %b %Y %X", gmtime()) + "\n")
     sb.append("\n")
 
+    target.write(sb.to_string())
+
+    sb.clear()
 
 
 class JsonObject(object):
+
     def __init__(self, json_content):
         data = json.loads(json_content)
         for key, value in data.items():
@@ -373,7 +380,8 @@ pks = list()
 last_id = list()
 g_some_list_aux = list()
 
-POSTGRES = "postgre.sql"
+OUTPUT_POSTGRES = "postgres.sql"
+
 
 def main():
     try:
@@ -382,15 +390,17 @@ def main():
 
         args = argparse.ArgumentParser(
             description='Arguments')
-        args.add_argument('-n', '--name_file', default=POSTGRES,
+        args.add_argument('-fn', '--file_name', default=OUTPUT_POSTGRES,
                           help='generate for this engine')
         args.add_argument('-t', '--target', default='postgresql',
                           help='generate for this engine')
+        args.add_argument('-i', '--insert', default=False,
+                          help='create tables before reloading')
         args.add_argument('-c', '--create', default=False,
                           help='create tables before reloading')
         args.add_argument('-d', '--drop', default=False,
                           help='drop tables before reloading')
-        args.add_argument('--debug',
+        args.add_argument('--debug', default=True,
                           help='set debug mode')
         args.add_argument('-v', '--version', action='version',
                           version="version %s" % version,
@@ -403,21 +413,63 @@ def main():
         else:
             data = JsonObject(open('schema.json').read())
 
+        sb = StringBuilder()
+
         # set database
         db = None
+        conn = None
+        cur = None
+
         if args.target == 'postgresql':
 
-            sb = StringBuilder()
+            # Insert on database if exist flag -i or --insert
+            if args.insert:
+                try:
+                    data_conn = JsonObject(open('config_postgres.json').read())
 
-            target = open('postgres.sql', 'w')
+                    sb.append("dbname='%s' " % data_conn.dbname)
+                    sb.append("user='%s' " % data_conn.user)
+                    sb.append("password='%s' " % data_conn.password)
+                    sb.append("host='%s' " % data_conn.host)
+                    sb.append("port='%s' " % data_conn.port)
+
+                    if args.debug:
+                        print "Open connection successfully\n"
+
+                    conn = psycopg2.connect(sb.to_string())
+
+                    cur = conn.cursor()
+
+                    sb.clear()
+
+                except Exception as e:
+                    print e
+
+            # Change file name if exist flag -d or --drop
+            if args.file_name:
+                target = open(args.file_name, 'w')
+            else:
+                target = open(OUTPUT_POSTGRES, 'w')
+
             target.truncate()
 
-            set_header_information(sb)
+            set_header_information(sb, target)
 
             # Delete all tables if exist flag -d or --drop
-            if args.create and len(args.create) != 0:
+            if args.drop:
                 sb.append("DROP SCHEMA PUBLIC CASCADE;\n")
                 sb.append("CREATE SCHEMA PUBLIC;\n\n")
+
+                target.write(sb.to_string())
+
+                if args.insert:
+
+                    if args.debug:
+                        print "Drop all tables"
+
+                    cur.execute(sb.to_string())
+
+                sb.clear()
 
             for table in data.tables:
 
@@ -425,12 +477,13 @@ def main():
                 if args.create and len(args.create) != 0:
 
                     sb.append("CREATE TABLE %s" % table['name'] + "(")
-                    
+
                     target.write("\n")
 
                     for field in table['fields']:
-                        sb.append("\n    " + field['name'] + " " + field['type'].upper())
-                        
+                        sb.append(
+                            "\n    " + field['name'] + " " + field['type'].upper())
+
                         if 'constraint' in field:
                             sb.append("(%s)" % field['constraint'])
 
@@ -441,7 +494,8 @@ def main():
                             sb.append(" PRIMARY KEY")
 
                         if 'foreign_key' in field:
-                            sb.append(" REFERENCES %s" % field['reference_table'])
+                            sb.append(" REFERENCES %s" %
+                                      field['reference_table'])
 
                         if 'unsigned' in field and field['unsigned']:
                             sb.append(" CHECK (" + field['name'] + ">=0)")
@@ -456,6 +510,13 @@ def main():
 
                     target.write(sb.to_string())
                     target.write("\n")
+
+                if args.insert:
+
+                    if args.debug:
+                        print "\nCreate table %s" % table['name']
+                    
+                    cur.execute(sb.to_string())
 
                 sb.clear()
 
@@ -488,6 +549,9 @@ def main():
                     sb.append(_sb)
                     sb.append(");")
 
+                    if args.insert:
+                        cur.execute(sb.to_string())
+
                     # print sb
 
                     target.write(sb.to_string())
@@ -497,6 +561,14 @@ def main():
                 target.write("\n")
 
             target.close()
+
+            if cur != None and conn != None:
+                conn.commit()
+                cur.close()
+                conn.close()
+
+                if args.debug:
+                    print "\nConnection closed successfully"
 
         elif args.target == 'mysql':
             db = MySQL()
