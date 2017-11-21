@@ -131,6 +131,10 @@ class Postgres(object):
     def generate_data(self):
 
         if self._is_foreign_key == True:
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             res = self.get_item_randomly(pks, self._reference_table)
 
             # Hack to table with relationship 1_n
@@ -143,6 +147,10 @@ class Postgres(object):
         fake = faker.Faker()
 
         if self._type == 'smallint':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['smallint'].split(',')
 
             if self._unsigned:
@@ -160,6 +168,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'integer':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['integer'].split(',')
 
             if self._unsigned == True:
@@ -177,6 +189,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'bigint':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['bigint'].split(',')
 
             if self._unsigned:
@@ -194,6 +210,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'decimal' or self._type == 'numeric':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['decimal'].split(',')
             start = float(number[0])
             end = float(number[1])
@@ -206,6 +226,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'real':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['real'].split(',')
             start = float(number[0])
             end = float(number[1])
@@ -218,6 +242,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'double precision':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['double precision'].split(',')
             start = float(number[0])
             end = float(number[1])
@@ -230,6 +258,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'serial':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['serial'].split(',')
             start = int(number[0])
             end = int(number[1])
@@ -242,6 +274,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'bigserial':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['bigserial'].split(',')
             start = int(number[0])
             end = int(number[1])
@@ -254,6 +290,10 @@ class Postgres(object):
             return res
 
         elif self._type == 'money':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             number = self._supported_types['money'].split(',')
             start = float(number[0])
             end = float(number[1])
@@ -267,6 +307,10 @@ class Postgres(object):
 
         elif self._type == 'character varying' or self._type == 'varchar' \
                 or self._type == 'character' or self._type == 'char':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             if self._constraint < 5:  # 5 is limitation of lib fake.text
                 res = fake.pystr(1, 1)
 
@@ -286,6 +330,9 @@ class Postgres(object):
 
         elif self._type == 'timestamp without time zone':
 
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             res = fake.date("%Y-%m-%d %H:%M:%S")
 
             if self._is_primary_key == True:
@@ -294,6 +341,9 @@ class Postgres(object):
             return res
 
         elif self._type == 'timestamp with time zone':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
 
             res = fake.date("%Y-%m-%d %H:%M:%S") + '+' + \
                 str(randint(0, 12)).zfill(2)
@@ -305,6 +355,9 @@ class Postgres(object):
 
         elif self._type == 'date':
 
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             res = fake.date("%Y-%m-%d")
 
             if self._is_primary_key == True:
@@ -313,6 +366,9 @@ class Postgres(object):
             return res
 
         elif self._type == 'time without time zone':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
 
             res = fake.time("%H:%M:%S")
 
@@ -323,6 +379,9 @@ class Postgres(object):
 
         elif self._type == 'time with time zone':
 
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             res = fake.time("%H:%M:%S") + '+' + str(randint(0, 12)).zfill(2)
 
             if self._is_primary_key == True:
@@ -332,6 +391,9 @@ class Postgres(object):
 
         elif self._type == 'boolean':
 
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
             res = fake.pybool()
 
             if self._is_primary_key == True:
@@ -340,6 +402,9 @@ class Postgres(object):
             return res
 
         elif self._type == 'uuid':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
 
             res = fake.uuid4()
 
@@ -517,13 +582,14 @@ def main():
                     target.write("\n")
 
                     for field in table['fields']:
+
                         sb.append(
                             "\n    " + field['name'] + " " + field['type'].upper())
 
                         if 'constraint' in field:
-                            sb.append("(%s)" % field['constraint'])
+                            sb.append("(%s)" % field['constraint']) 
 
-                        if 'null' in field and field['null']:
+                        if 'null' in field and not field['null']:
                             sb.append(" NOT NULL")
 
                         if 'primary_key' in field:
@@ -584,7 +650,12 @@ def main():
 
                         rdgrd = Postgres(field, table['name'])
 
-                        sb.append("'%s'," % rdgrd.generate_data())
+                        data_gen = rdgrd.generate_data()
+
+                        if data_gen == None:
+                            sb.append("NULL,")
+                        else:
+                            sb.append("'%s'," % data_gen)
 
                     _sb = sb.to_string()[:-1]
                     sb.clear()

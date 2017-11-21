@@ -107,3 +107,35 @@ LINE 2:     id INTEGER(8) PRIMARY KEY,
 [2017-11-21 01:04:06] -> ERROR -> relation "users" already exists
 
 [2017-11-21 01:04:17] -> ERROR -> can't execute an empty query
+[2017-11-21 10:02:37] -> ERROR -> 'NoneType' object has no attribute 'execute'
+[2017-11-21 11:08:25] -> ERROR -> global name 'oi' is not defined
+[2017-11-21 11:19:43] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (1755521420, null).
+
+[2017-11-21 11:19:50] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (-1379748506, null).
+
+[2017-11-21 14:23:50] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (-1859049884, null).
+
+[2017-11-21 14:25:53] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (-751922756, null).
+
+[2017-11-21 14:26:29] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (-1177515072, null).
+
+[2017-11-21 14:28:19] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (1169551454, null).
+
+[2017-11-21 14:29:00] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (416191917, null).
+
+[2017-11-21 14:29:29] -> ERROR -> cannot concatenate 'str' and 'dict' objects
+[2017-11-21 14:29:33] -> ERROR -> cannot concatenate 'str' and 'dict' objects
+[2017-11-21 14:29:35] -> ERROR -> cannot concatenate 'str' and 'dict' objects
+[2017-11-21 14:29:43] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (1308930423, null).
+
+[2017-11-21 14:30:02] -> ERROR -> null value in column "name" violates not-null constraint
+DETAIL:  Failing row contains (191941432, null).
+

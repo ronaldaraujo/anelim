@@ -1,7 +1,7 @@
 {
   "tables": [
     {
-      "number_inserts": 1000,
+      "number_inserts": 10,
       "name": "products",
       "fields": [
         {
@@ -12,10 +12,10 @@
           "null": false
         },
         {
-          "name": "nome",
+          "name": "name",
           "type": "varchar",
           "constraint": 255,
-          "null": false
+          "null": true
         }
       ]
     }
