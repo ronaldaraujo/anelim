@@ -11,6 +11,7 @@ from random import randint
 from cStringIO import StringIO
 from time import gmtime, strftime
 from os import system
+from datetime import datetime
 
 class StringBuilder:
     _value = None
@@ -435,6 +436,9 @@ def main():
         args.add_argument("-f", "--file", type=str)
         args = args.parse_args()
 
+        if args.debug:
+            start_time = datetime.now()
+
         if args.file:
             data = JsonObject(open(args.file).read())
         else:
@@ -615,6 +619,9 @@ def main():
         else:
             raise Exception(
                 "unexpected target database {0}".format(args.target))
+
+        if args.debug:
+            print "\nRuntime: " + str(datetime.now() - start_time)
 
     except Exception as e:
         print e

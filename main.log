@@ -94,3 +94,16 @@ LINE 2:     id INTEGER PRIMARY KEY CHEC (id>=0),
 LINE 2:     id INTEGER(8) PRIMARY KEY,
                       ^
 
+[2017-11-20 22:48:02] -> ERROR -> [Errno 2] No such file or directory: 'schema.json'
+[2017-11-20 22:48:26] -> ERROR -> 'type'
+[2017-11-20 23:58:09] -> ERROR -> Extra data: line 422 column 3 - line 423 column 2 (char 9185 - 9188)
+[2017-11-20 23:58:30] -> ERROR -> Extra data: line 422 column 3 - line 423 column 2 (char 9185 - 9188)
+[2017-11-21 00:02:46] -> ERROR -> Extra data: line 422 column 3 - line 423 column 2 (char 9185 - 9188)
+[2017-11-21 00:02:51] -> ERROR -> Extra data: line 422 column 3 - line 423 column 2 (char 9185 - 9188)
+[2017-11-21 00:38:10] -> ERROR -> relation "employee" does not exist
+
+[2017-11-21 00:54:36] -> ERROR -> global name 'startTime' is not defined
+[2017-11-21 00:59:58] -> ERROR -> cannot concatenate 'str' and 'datetime.datetime' objects
+[2017-11-21 01:04:06] -> ERROR -> relation "users" already exists
+
+[2017-11-21 01:04:17] -> ERROR -> can't execute an empty query
