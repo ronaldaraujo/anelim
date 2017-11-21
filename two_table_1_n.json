@@ -8,7 +8,6 @@
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },
@@ -28,7 +27,6 @@
           "name": "id",
           "primary_key": true,
           "type": "integer",
-          "constraint": 8,
           "unsigned": true,
           "null": false
         },

@@ -13,6 +13,7 @@ from time import gmtime, strftime
 from os import system
 from datetime import datetime
 
+
 class StringBuilder:
     _value = None
 
@@ -314,6 +315,12 @@ class Postgres(object):
             if self._constraint < 5:  # 5 is limitation of lib fake.text
                 res = fake.pystr(1, 1)
 
+                if self._column_name.lower() == "address":
+                    res = fake.address()
+
+                if self._column_name.lower() == "name":
+                    res = fake.name()
+
                 if self._is_primary_key == True:
                     pks.append(
                         (self._table_name, self._column_name, res))
@@ -321,6 +328,12 @@ class Postgres(object):
                 return res
             else:
                 res = fake.text(self._constraint)
+
+                if self._column_name.lower() == "address":
+                    res = fake.address()
+
+                if self._column_name.lower() == "name":
+                    res = fake.name()
 
                 if self._is_primary_key == True:
                     pks.append(
@@ -436,10 +449,11 @@ def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, lengt
     system('clear')
 
     print "\r%s |%s| %s%% %s" % (prefix, bar, percent, suffix)
-    
+
     # Print New Line on Complete
     if iteration == total:
         print ""
+
 
 def get_item(someList, value):
     for x, y, z in someList:
@@ -570,7 +584,8 @@ def main():
             if not args.debug:
                 l = len(data.tables)
                 bar = 0
-                print_progress_bar(bar, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+                print_progress_bar(bar, l, prefix='Progress:',
+                                   suffix='Complete', length=50)
 
             for table in data.tables:
 
@@ -587,7 +602,7 @@ def main():
                             "\n    " + field['name'] + " " + field['type'].upper())
 
                         if 'constraint' in field:
-                            sb.append("(%s)" % field['constraint']) 
+                            sb.append("(%s)" % field['constraint'])
 
                         if 'null' in field and not field['null']:
                             sb.append(" NOT NULL")
@@ -628,7 +643,8 @@ def main():
 
                     if not args.debug and bar <= len_number_inserts:
                         bar = bar + 1
-                        print_progress_bar(bar, len_number_inserts, prefix = 'Progress:', suffix = 'Complete', length = 50)
+                        print_progress_bar(
+                            bar, len_number_inserts, prefix='Progress:', suffix='Complete', length=50)
 
                     sb.append("INSERT INTO %s(" % table['name'])
 
@@ -689,7 +705,7 @@ def main():
             db = MySQL()
         else:
             raise Exception(
-                "unexpected target database {0}".format(args.target))
+                "Unexpected target database {0}".format(args.target))
 
         if args.debug:
             print "\nRuntime: " + str(datetime.now() - start_time)

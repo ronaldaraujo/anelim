@@ -1,5 +1,5 @@
 -- Anelim.py - Version: 1.0.0
--- Script generated on ter, 21 nov 2017 17:32:39
+-- Script generated on ter, 21 nov 2017 17:43:17
 
 DROP SCHEMA PUBLIC CASCADE;
 CREATE SCHEMA PUBLIC;
@@ -7,23 +7,23 @@ CREATE SCHEMA PUBLIC;
 
 CREATE TABLE products(
     id INTEGER NOT NULL PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255),
+    address VARCHAR(255)
 );
-INSERT INTO products(id,name) VALUES('-1062684136','Alias porro fuga aspernatur error magni.
-Necessitatibus recusandae autem. Sunt saepe voluptate minima unde asperiores rem. Expedita est amet cum veniam earum ex.');
-INSERT INTO products(id,name) VALUES('-743671225','Consectetur eius ut iure hic saepe voluptate facere. Autem non voluptas iste ipsam necessitatibus similique reiciendis.
-Veritatis ipsa voluptatum deserunt ex culpa amet. Quaerat voluptas impedit dicta est. Quo quos officiis quos voluptate.');
-INSERT INTO products(id,name) VALUES('-1760007205',NULL);
-INSERT INTO products(id,name) VALUES('-2067311992','Quasi laborum laudantium debitis. Ex reprehenderit nulla rem. Aut voluptatibus minus quae sapiente distinctio.
-Quos suscipit earum. Inventore suscipit culpa odio accusantium quos sint atque.');
-INSERT INTO products(id,name) VALUES('-938972236',NULL);
-INSERT INTO products(id,name) VALUES('-1824079630','Quod itaque sed cupiditate. Unde veniam eligendi deserunt excepturi. Unde esse quas expedita.
-Alias expedita quidem explicabo occaecati. Nesciunt iusto possimus consequuntur eum corrupti nesciunt.
-Atque magnam autem velit. In veritatis adipisci ullam.');
-INSERT INTO products(id,name) VALUES('967784704','Qui quod exercitationem voluptatum optio eos. Saepe soluta cumque cumque sit nisi. Est natus necessitatibus reiciendis repellendus.
-Ducimus modi ullam minima et ipsa esse. Sapiente similique sunt ea asperiores.');
-INSERT INTO products(id,name) VALUES('747528626',NULL);
-INSERT INTO products(id,name) VALUES('1222404129',NULL);
-INSERT INTO products(id,name) VALUES('1520456936','Ut praesentium ducimus assumenda. Cupiditate doloribus placeat earum itaque ipsum repellendus.
-Optio dolorum quam soluta totam. Fugiat temporibus aliquam nihil aspernatur quidem. Laudantium placeat voluptate rem in sequi occaecati.');
+INSERT INTO products(id,name,address) VALUES('1736495226','Connor Kelly','3925 Kathryn Centers
+Marymouth, PW 15346-0134');
+INSERT INTO products(id,name,address) VALUES('9330441',NULL,'26197 Rodriguez Plain
+New Melissa, LA 64351');
+INSERT INTO products(id,name,address) VALUES('-1384490077','Brian Cohen','0370 David Drive
+South Johnberg, DE 31598');
+INSERT INTO products(id,name,address) VALUES('-680127659','Sandra Galloway','46408 Mack Mall Apt. 132
+Kennethhaven, NV 57207-4245');
+INSERT INTO products(id,name,address) VALUES('-2016118005','Matthew Smith','2682 Thomas Fall Apt. 266
+East Carolyn, NY 71564');
+INSERT INTO products(id,name,address) VALUES('-823676893',NULL,'1657 Drake Locks Apt. 864
+West Jessechester, DE 34294-9853');
+INSERT INTO products(id,name,address) VALUES('-1952194299',NULL,NULL);
+INSERT INTO products(id,name,address) VALUES('792228083','Deborah Lee',NULL);
+INSERT INTO products(id,name,address) VALUES('-1431452568',NULL,NULL);
+INSERT INTO products(id,name,address) VALUES('-185999950',NULL,NULL);
 
