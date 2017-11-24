@@ -37,7 +37,7 @@ class StringBuilder(object):
         return self._value.getvalue()
 
 
-class Postgres(object):
+class Anelim(object):
     _column_name = None
     _type = None
     _is_nullable = True
@@ -72,7 +72,12 @@ class Postgres(object):
                         'time without time zone': '',
                         'time with time zone': '-12,+12',
                         'boolean': '',
-                        'uuid': ''}
+                        'uuid': '',
+                        # MSSQL
+                        'bit': '1,0',
+                        'smallmoney': '-2147483648,2147483647',
+                        'tinyint': '0,255',      
+                        'float':'-999999999999999,999999999999999'}
 
     def __init__(self, field, table_name):
         self._column_name = field['name']
@@ -169,6 +174,36 @@ class Postgres(object):
 
             return res
 
+        elif self._type == 'bit':
+            res = None
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
+            res = random.choice([1, 0])
+
+            if self._is_primary_key:
+                pks.append((self._table_name, self._column_name, res))
+
+            return res
+
+        elif self._type == 'tinyint':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
+            number = self._supported_types['tinyint'].split(',')
+
+            start = int(number[0])
+            end = int(number[1])
+
+            res = randint(start, end)
+
+            if self._is_primary_key:
+                pks.append((self._table_name, self._column_name, res))
+
+            return res
+
         elif self._type == 'integer':
 
             if self._is_nullable and random.choice([True, False]):
@@ -243,7 +278,7 @@ class Postgres(object):
 
             return res
 
-        elif self._type == 'double precision':
+        elif self._type == 'double precision' or self._type == 'float':
 
             if self._is_nullable and random.choice([True, False]):
                 return None
@@ -285,6 +320,22 @@ class Postgres(object):
             end = int(number[1])
 
             res = randint(start, end)
+
+            if self._is_primary_key:
+                pks.append((self._table_name, self._column_name, res))
+
+            return res
+
+        elif self._type == 'smallmoney':
+
+            if self._is_nullable and random.choice([True, False]):
+                return None
+
+            number = self._supported_types['smallmoney'].split(',')
+            start = float(number[0])
+            end = float(number[1])
+
+            res = locale.currency(random.uniform(start, end))
 
             if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
@@ -664,7 +715,7 @@ def main():
 
                 for field in table['fields']:
 
-                    rdgrd = Postgres(field, table['name'])
+                    rdgrd = Anelim(field, table['name'])
 
                     if rdgrd.datatype_is_supported() == 'jump':
                         continue
@@ -678,7 +729,7 @@ def main():
 
                 for field in table['fields']:
 
-                    rdgrd = Postgres(field, table['name'])
+                    rdgrd = Anelim(field, table['name'])
 
                     data_gen = rdgrd.generate_data()
 
