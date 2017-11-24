@@ -1,7 +1,7 @@
 {
   "tables": [
     {
-      "number_inserts": 100000,
+      "number_inserts": 100,
       "name": "products",
       "fields": [
         {

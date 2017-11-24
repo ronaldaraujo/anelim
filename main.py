@@ -7,6 +7,7 @@ import string
 import faker
 import argparse
 import psycopg2
+import pymssql
 from random import randint
 from cStringIO import StringIO
 from time import gmtime, strftime
@@ -14,7 +15,7 @@ from os import system
 from datetime import datetime
 
 
-class StringBuilder:
+class StringBuilder(object):
     _value = None
 
     def __init__(self):
@@ -119,19 +120,19 @@ class Postgres(object):
         return random.choice(g_some_list_aux)[2]
 
     def datatype_is_supported(self):
-        if self._type not in self._supported_types and self._is_nullable == False:
+        if self._type not in self._supported_types and self._is_nullable is False:
             raise ValueError(
                 'The datatype \'%s\' is not supported and does not accept null. '
                 'To continue, check the datatype to accept null or delete this '
                 'column from your database.' % self._type)
-        elif self._type not in self._supported_types and self._is_nullable == True:
+        elif self._type not in self._supported_types and self._is_nullable:
             return 'jump'
         else:
             return True
 
     def generate_data(self):
 
-        if self._is_foreign_key == True:
+        if self._is_foreign_key:
 
             if self._is_nullable and random.choice([True, False]):
                 return None
@@ -163,7 +164,7 @@ class Postgres(object):
 
             res = randint(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -175,7 +176,7 @@ class Postgres(object):
 
             number = self._supported_types['integer'].split(',')
 
-            if self._unsigned == True:
+            if self._unsigned:
                 start = 1
             else:
                 start = int(number[0])
@@ -184,7 +185,7 @@ class Postgres(object):
 
             res = randint(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -205,7 +206,7 @@ class Postgres(object):
 
             res = randint(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -221,7 +222,7 @@ class Postgres(object):
 
             res = random.uniform(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -237,7 +238,7 @@ class Postgres(object):
 
             res = random.uniform(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -253,7 +254,7 @@ class Postgres(object):
 
             res = random.uniform(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -269,7 +270,7 @@ class Postgres(object):
 
             res = randint(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -285,7 +286,7 @@ class Postgres(object):
 
             res = randint(start, end)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -301,7 +302,7 @@ class Postgres(object):
 
             res = locale.currency(random.uniform(start, end))
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -321,7 +322,7 @@ class Postgres(object):
                 if self._column_name.lower() == "name":
                     res = fake.name()
 
-                if self._is_primary_key == True:
+                if self._is_primary_key:
                     pks.append(
                         (self._table_name, self._column_name, res))
 
@@ -335,7 +336,7 @@ class Postgres(object):
                 if self._column_name.lower() == "name":
                     res = fake.name()
 
-                if self._is_primary_key == True:
+                if self._is_primary_key:
                     pks.append(
                         (self._table_name, self._column_name, res))
 
@@ -348,7 +349,7 @@ class Postgres(object):
 
             res = fake.date("%Y-%m-%d %H:%M:%S")
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -361,7 +362,7 @@ class Postgres(object):
             res = fake.date("%Y-%m-%d %H:%M:%S") + '+' + \
                 str(randint(0, 12)).zfill(2)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -373,7 +374,7 @@ class Postgres(object):
 
             res = fake.date("%Y-%m-%d")
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -385,7 +386,7 @@ class Postgres(object):
 
             res = fake.time("%H:%M:%S")
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -397,7 +398,7 @@ class Postgres(object):
 
             res = fake.time("%H:%M:%S") + '+' + str(randint(0, 12)).zfill(2)
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -409,7 +410,7 @@ class Postgres(object):
 
             res = fake.pybool()
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -421,7 +422,7 @@ class Postgres(object):
 
             res = fake.uuid4()
 
-            if self._is_primary_key == True:
+            if self._is_primary_key:
                 pks.append((self._table_name, self._column_name, res))
 
             return res
@@ -488,6 +489,7 @@ last_id = list()
 g_some_list_aux = list()
 
 OUTPUT_POSTGRES = "postgres.sql"
+OUTPUT_MSSQL = "mssql.sql"
 
 
 def main():
@@ -497,9 +499,9 @@ def main():
 
         args = argparse.ArgumentParser(
             description='Arguments')
-        args.add_argument('-fn', '--file_name', default=OUTPUT_POSTGRES,
+        args.add_argument('-of', '--out_file', default=OUTPUT_MSSQL,
                           help='generate for this engine')
-        args.add_argument('-t', '--target', default='postgresql',
+        args.add_argument('-t', '--target', default='mssql',
                           help='generate for this engine')
         args.add_argument('-i', '--insert', default=False,
                           help='create tables before reloading')
@@ -530,11 +532,11 @@ def main():
         conn = None
         cur = None
 
-        if args.target == 'postgresql':
+        # Insert on database if exist flag -i or --insert
+        if args.insert:
+            try:
 
-            # Insert on database if exist flag -i or --insert
-            if args.insert:
-                try:
+                if args.target == 'postgresql':
                     data_conn = JsonObject(open('config_postgres.json').read())
 
                     sb.append("dbname='%s' " % data_conn.dbname)
@@ -543,169 +545,179 @@ def main():
                     sb.append("host='%s' " % data_conn.host)
                     sb.append("port='%s' " % data_conn.port)
 
-                    if args.debug:
-                        print "Open connection successfully\n"
-
                     conn = psycopg2.connect(sb.to_string())
-
                     cur = conn.cursor()
 
-                    sb.clear()
+                else:
+                    data_conn = JsonObject(open('config_mssql.json').read())
 
-                except Exception as e:
-                    print e
+                    conn = pymssql.connect(data_conn.host, data_conn.user, data_conn.password, data_conn.dbname)
+                    cur = conn.cursor()
 
-            # Change file name if exist flag -d or --drop
-            if args.file_name:
-                target = open(args.file_name, 'w')
-            else:
+                sb.clear()
+
+                if args.debug:
+                    print "Open connection successfully\n"
+
+            except Exception as e:
+                print e
+
+        # Change file name if exist flag -d or --drop
+        if args.out_file:
+            target = open(args.out_file, 'w')
+        else:
+            if args.target == 'postgresql':
                 target = open(OUTPUT_POSTGRES, 'w')
+            else:
+                target = open(OUTPUT_MSSQL, 'w')
 
-            target.truncate()
+        target.truncate()
 
-            set_header_information(sb, target)
+        set_header_information(sb, target)
 
-            # Delete all tables if exist flag -d or --drop
-            if args.drop:
+        # Delete all tables if exist flag -d or --drop
+        if args.drop:
+
+            if args.target == 'postgresql':
                 sb.append("DROP SCHEMA PUBLIC CASCADE;\n")
                 sb.append("CREATE SCHEMA PUBLIC;\n\n")
+            else:
+                sb.append("EXEC sp_MSforeachtable @command1 = 'DROP TABLE ?'")
 
-                target.write(sb.to_string())
+            target.write(sb.to_string())
 
-                if args.insert:
+            if args.insert:
 
-                    if args.debug:
-                        print "Drop all tables"
+                if args.debug:
+                    print "Drop all tables"
 
-                    cur.execute(sb.to_string())
+                cur.execute(sb.to_string())
 
-                sb.clear()
+            sb.clear()
 
-            if not args.debug:
-                l = len(data.tables)
-                bar = 0
-                print_progress_bar(bar, l, prefix='Progress:',
-                                   suffix='Complete', length=50)
+        if not args.debug:
+            l = len(data.tables)
+            bar = 0
+            print_progress_bar(bar, l, prefix='Progress:',
+                                suffix='Complete', length=50)
 
-            for table in data.tables:
+        for table in data.tables:
 
-                # Create tables if exist flag -c or --create
-                if args.create and len(args.create) != 0:
+            # Create tables if exist flag -c or --create
+            if args.create and len(args.create) != 0:
 
-                    sb.append("CREATE TABLE %s" % table['name'] + "(")
-
-                    target.write("\n")
-
-                    for field in table['fields']:
-
-                        sb.append(
-                            "\n    " + field['name'] + " " + field['type'].upper())
-
-                        if 'constraint' in field:
-                            sb.append("(%s)" % field['constraint'])
-
-                        if 'null' in field and not field['null']:
-                            sb.append(" NOT NULL")
-
-                        if 'primary_key' in field:
-                            sb.append(" PRIMARY KEY")
-
-                        if 'foreign_key' in field:
-                            sb.append(" REFERENCES %s" %
-                                      field['reference_table'])
-
-                        if 'unsigned' in field and field['unsigned']:
-                            sb.append(" CHECK (" + field['name'] + ">=0)")
-
-                        sb.append(",")
-
-                    _sb = sb.to_string()[:-1]
-                    sb.clear()
-                    sb.append(_sb)
-
-                    sb.append("\n);")
-
-                    target.write(sb.to_string())
-                    target.write("\n")
-
-                if args.insert:
-
-                    if args.debug:
-                        print "\nCreate table %s" % table['name']
-
-                    cur.execute(sb.to_string())
-
-                sb.clear()
-
-                len_number_inserts = table['number_inserts']
-
-                for _ in xrange(1, table['number_inserts'] + 1):
-
-                    if not args.debug and bar <= len_number_inserts:
-                        bar = bar + 1
-                        print_progress_bar(
-                            bar, len_number_inserts, prefix='Progress:', suffix='Complete', length=50)
-
-                    sb.append("INSERT INTO %s(" % table['name'])
-
-                    for field in table['fields']:
-
-                        rdgrd = Postgres(field, table['name'])
-
-                        if rdgrd.datatype_is_supported() == 'jump':
-                            continue
-                        else:
-                            sb.append("%s," % field['name'])
-
-                    _sb = sb.to_string()[:-1]
-                    sb.clear()
-                    sb.append(_sb)
-                    sb.append(") VALUES(")
-
-                    for field in table['fields']:
-
-                        rdgrd = Postgres(field, table['name'])
-
-                        data_gen = rdgrd.generate_data()
-
-                        if data_gen == None:
-                            sb.append("NULL,")
-                        else:
-                            sb.append("'%s'," % data_gen)
-
-                    _sb = sb.to_string()[:-1]
-                    sb.clear()
-                    sb.append(_sb)
-                    sb.append(");")
-
-                    if args.insert:
-
-                        if args.debug:
-                            print sb
-
-                        cur.execute(sb.to_string())
-
-                    target.write(sb.to_string())
-                    target.write("\n")
-                    sb.clear()
+                sb.append("CREATE TABLE %s" % table['name'] + "(")
 
                 target.write("\n")
 
-            target.close()
+                for field in table['fields']:
 
-            if cur != None and conn != None:
-                conn.commit()
-                cur.close()
-                conn.close()
+                    sb.append(
+                        "\n    " + field['name'] + " " + field['type'].upper())
+
+                    if 'constraint' in field:
+                        sb.append("(%s)" % field['constraint'])
+
+                    if 'null' in field and not field['null']:
+                        sb.append(" NOT NULL")
+
+                    if 'primary_key' in field:
+                        sb.append(" PRIMARY KEY")
+
+                    if 'foreign_key' in field:
+                        sb.append(" REFERENCES %s" %
+                                    field['reference_table'])
+
+                    if 'unsigned' in field and field['unsigned']:
+                        sb.append(" CHECK (" + field['name'] + ">=0)")
+
+                    sb.append(",")
+
+                _sb = sb.to_string()[:-1]
+                sb.clear()
+                sb.append(_sb)
+
+                sb.append("\n);")
+
+                target.write(sb.to_string())
+                target.write("\n")
+
+            if args.insert:
 
                 if args.debug:
-                    print "\nConnection closed successfully"
+                    print "\nCreate table %s" % table['name']
 
-        elif args.target == 'mysql':
-            db = MySQL()
-        else:
-            raise Exception(
-                "Unexpected target database {0}".format(args.target))
+                cur.execute(sb.to_string())
+
+            sb.clear()
+
+            len_number_inserts = table['number_inserts']
+
+            for _ in xrange(1, table['number_inserts'] + 1):
+
+                if not args.debug and bar <= len_number_inserts:
+                    bar = bar + 1
+                    print_progress_bar(
+                        bar, len_number_inserts, prefix='Progress:', suffix='Complete', length=50)
+
+                sb.append("INSERT INTO %s(" % table['name'])
+
+                for field in table['fields']:
+
+                    rdgrd = Postgres(field, table['name'])
+
+                    if rdgrd.datatype_is_supported() == 'jump':
+                        continue
+                    else:
+                        sb.append("%s," % field['name'])
+
+                _sb = sb.to_string()[:-1]
+                sb.clear()
+                sb.append(_sb)
+                sb.append(") VALUES(")
+
+                for field in table['fields']:
+
+                    rdgrd = Postgres(field, table['name'])
+
+                    data_gen = rdgrd.generate_data()
+
+                    if data_gen == None:
+                        sb.append("NULL,")
+                    else:
+                        sb.append("'%s'," % data_gen)
+
+                _sb = sb.to_string()[:-1]
+                sb.clear()
+                sb.append(_sb)
+                sb.append(");")
+
+                if args.insert:
+
+                    if args.debug:
+                        print sb
+
+                    cur.execute(sb.to_string())
+
+                target.write(sb.to_string())
+                target.write("\n")
+                sb.clear()
+
+            target.write("\n")
+
+        target.close()
+
+        if cur != None and conn != None:
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            if args.debug:
+                print "\nConnection closed successfully"
+
+        # else:
+        #     raise Exception(
+        #         "Unexpected target database {0}".format(args.target))
 
         if args.debug:
             print "\nRuntime: " + str(datetime.now() - start_time)

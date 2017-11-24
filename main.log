@@ -147,3 +147,19 @@ LINE 2:     id INTEGER(8) NOT NULL PRIMARY KEY,
 [2017-11-21 14:47:42] -> ERROR -> value too long for type character varying(12)
 
 [2017-11-21 14:51:56] -> ERROR -> [Errno 2] No such file or directory: 'one.json'
+[2017-11-24 11:45:38] -> ERROR -> [Errno 2] No such file or directory: 'schema.json'
+[2017-11-24 14:30:11] -> ERROR -> [Errno 2] No such file or directory: 'schema.json'
+[2017-11-24 14:57:54] -> ERROR -> [Errno 2] No such file or directory: 'schema.json'
+[2017-11-24 15:47:44] -> ERROR -> (574, 'DROP DATABASE statement cannot be used inside a user transaction.DB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\n')
+[2017-11-24 15:58:27] -> ERROR -> 'NoneType' object has no attribute 'execute'
+[2017-11-24 15:58:45] -> ERROR -> 'pymssql.Connection' object has no attribute 'execute'
+[2017-11-24 15:59:23] -> ERROR -> (574, 'DROP DATABASE statement cannot be used inside a user transaction.DB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\n')
+[2017-11-24 16:04:45] -> ERROR -> (102, "Incorrect syntax near 'GOCREATE'.DB-Lib error message 20018, severity 15:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+[2017-11-24 16:05:11] -> ERROR -> (102, "Incorrect syntax near 'GOCREATE'.DB-Lib error message 20018, severity 15:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+[2017-11-24 16:05:29] -> ERROR -> (102, "Incorrect syntax near 'GO'.DB-Lib error message 20018, severity 15:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+[2017-11-24 16:05:32] -> ERROR -> (102, "Incorrect syntax near 'GO'.DB-Lib error message 20018, severity 15:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+[2017-11-24 16:05:40] -> ERROR -> (574, 'DROP DATABASE statement cannot be used inside a user transaction.DB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\n')
+[2017-11-24 16:08:51] -> ERROR -> (574, 'DROP DATABASE statement cannot be used inside a user transaction.DB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\n')
+[2017-11-24 16:28:46] -> ERROR -> (208, "Invalid object name 'Suppliers'.DB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+[2017-11-24 16:30:26] -> ERROR -> (2715, 'Column, parameter, or variable #9: Cannot find data type BOOLEAN.DB-Lib error message 20018, severity 16:\nGeneral SQL Server error: Check messages from the SQL Server\n')
+[2017-11-24 16:31:56] -> ERROR -> [Errno 2] No such file or directory: 'one.json'
