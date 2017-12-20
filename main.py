@@ -129,7 +129,7 @@ class Anelim(object):
             raise ValueError(
                 'The datatype \'%s\' is not supported and does not accept null. '
                 'To continue, check the datatype to accept null or delete this '
-                'column from your database.' % self._type)
+                'column from your schema.' % self._type)
         elif self._type not in self._supported_types and self._is_nullable:
             return 'jump'
         else:

@@ -13,3 +13,5 @@ pip install -r requirements.txt
 
 sqlserver --> Sucesso!@#
 https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-ubuntu
+
+postgres --> Runtime: 0:01:09.915622
