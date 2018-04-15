@@ -83,9 +83,6 @@ It is important to note that configuration file attributes marked with an asteri
         }
         ...
       ]
-  <a align="center" hrefhttps://github.com/ronaldaraujo/anelimio"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
-
-  
     }
     ...
   ]
@@ -122,10 +119,7 @@ For example, the code below describes the model of the connection configuration 
     "host": string,
     "port": integer
 }
-<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
-``
-
-`
+```
 
 The configuration file of the connection is self-explanatory and each database supported by the tool has, at the root of the project, a configuration file: ***config_mssql.json*** and ***config_postgres.json***.
 
@@ -164,9 +158,6 @@ The configuration file of the connection is self-explanatory and each database s
 **Not supported:✗**
 
 If in the act of reading the schema the tool finds some type of data that is not in table above and this type of data does not accept a null value, it returns an error saying that it can not generate such a data.
-<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
-
-
 
 In summary, Anelim displays the following error message "***The datatype 'xpto' is not supported and does not accept null. To continue, check the datatype to accept null or delete this column from your schema.***", where it provides the user the option to set the field to accept empty values (thus ignoring it) or to remove it from the schema.
 
