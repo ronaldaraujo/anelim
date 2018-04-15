@@ -1,7 +1,8 @@
-[![Anelim](https://i.imgur.com/C5apTAH.png)](https://github.com/ronaldaraujo/anelim)
+<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://i.imgur.com/C5apTAH.png" alt="Anelim - Random Data Generation Tool"></a>
+
 Anelim is a script developed in python that aims to generate data for relational database. Currently the tool has support for: SQL Server and PostgreSQL.
 
-### Installation
+## Installation
 
 1. Verify that you have virtualenv installed by:
 ```sh
@@ -38,13 +39,16 @@ $ cd ~/anelim
 ```sh
 $ pip install -r requirements.txt
 ```
+<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
+
+
 
 8. To run the tool, simply run the terminal:
 ```sh
 $ python main.py
 ```
 
-### Configuration file
+## Configuration file
 
 The tool expects as input a JSON file containing the following characteristics:
 
@@ -82,13 +86,16 @@ It is important to note that configuration file attributes marked with an asteri
         }
         ...
       ]
+  <a align="center" hrefhttps://github.com/ronaldaraujo/anelimio"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
+
+  
     }
     ...
   ]
 }
 ```
 
-### Parameters
+## Parameters
 After the configuration file, the user can inform, at the moment of the execution of the tool, some parameters, they are:
 
 Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
@@ -118,11 +125,14 @@ For example, the code below describes the model of the connection configuration 
     "host": string,
     "port": integer
 }
-```
+<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
+``
+
+`
 
 The configuration file of the connection is self-explanatory and each database supported by the tool has, at the root of the project, a configuration file: ***config_mssql.json*** and ***config_postgres.json***.
 
-### Supported Data Types
+## Supported Data Types
 
 | Type of data | SQL Server | PostgreSQL |
 | :------: | :------: | :------: |
@@ -157,10 +167,13 @@ The configuration file of the connection is self-explanatory and each database s
 **Not supported:✗**
 
 If in the act of reading the schema the tool finds some type of data that is not in table above and this type of data does not accept a null value, it returns an error saying that it can not generate such a data.
+<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
+
+
 
 In summary, Anelim displays the following error message "***The datatype 'xpto' is not supported and does not accept null. To continue, check the datatype to accept null or delete this column from your schema.***", where it provides the user the option to set the field to accept empty values (thus ignoring it) or to remove it from the schema.
 
-### Todos
+## Todos
 
  - Support MySQL
 
