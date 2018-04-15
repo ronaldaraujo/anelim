@@ -39,9 +39,6 @@ $ cd ~/anelim
 ```sh
 $ pip install -r requirements.txt
 ```
-<a align="center" href="https://github.com/ronaldaraujo/anelim"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework"></a>
-
-
 
 8. To run the tool, simply run the terminal:
 ```sh
