@@ -159,7 +159,7 @@ The configuration file of the connection is self-explanatory and each database s
 
 If in the act of reading the schema the tool finds some type of data that is not in table above and this type of data does not accept a null value, it returns an error saying that it can not generate such a data.
 
-In summary, Anelim displays the following error message "***The datatype 'xpto' is not supported and does not accept null. To continue, check the datatype to accept null or delete this column from your schema.***", where it provides the user the option to set the field to accept empty values (thus ignoring it) or to remove it from the schema.
+In summary, Anelim displays the following error message **"The datatype 'xpto' is not supported and does not accept null. To continue, check the datatype to accept null or delete this column from your schema."**, where it provides the user the option to set the field to accept empty values (thus ignoring it) or to remove it from the schema.
 
 ## Todos
 
