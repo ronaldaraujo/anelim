@@ -50,7 +50,7 @@ class Anelim(object):
     _pks = list()
     _new_pks = list()
 
-    # Datatypes from https://www.postgresql.org/docs/9.6/static/datatype.html
+    # Datatypes from https://www.postgres.org/docs/9.6/static/datatype.html
     _supported_types = {'smallint': '-32768,32767',
                         'integer': '-2147483648,2147483647',
                         'bigint': '-9223372036854775808,9223372036854775807',
@@ -501,6 +501,7 @@ def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, lengt
     system('clear')
 
     print "\r%s |%s| %s%% %s" % (prefix, bar, percent, suffix)
+    
 
     # Print New Line on Complete
     if iteration == total:
@@ -587,7 +588,7 @@ def main():
         if args.insert:
             try:
 
-                if args.target == 'postgresql':
+                if args.target == 'postgres':
                     data_conn = JsonObject(open('config_postgres.json').read())
 
                     sb.append("dbname='%s' " % data_conn.dbname)
@@ -617,7 +618,7 @@ def main():
         if args.out_file:
             target = open(args.out_file, 'w')
         else:
-            if args.target == 'postgresql':
+            if args.target == 'postgres':
                 target = open(OUTPUT_POSTGRES, 'w')
             else:
                 target = open(OUTPUT_MSSQL, 'w')
@@ -629,7 +630,7 @@ def main():
         # Delete all tables if exist flag -d or --drop
         if args.drop:
 
-            if args.target == 'postgresql':
+            if args.target == 'postgres':
                 sb.append("DROP SCHEMA PUBLIC CASCADE;\n")
                 sb.append("CREATE SCHEMA PUBLIC;\n\n")
             else:
@@ -693,11 +694,13 @@ def main():
                 target.write(sb.to_string())
                 target.write("\n")
 
+            if args.debug:
+                print "\nCreate table %s" % table['name']
+
             if args.insert:
-
                 if args.debug:
-                    print "\nCreate table %s" % table['name']
-
+                    print "\n[CREATE TABLE]: Executing query in the database"
+                
                 cur.execute(sb.to_string())
 
             sb.clear()
@@ -707,9 +710,9 @@ def main():
             for _ in xrange(1, table['number_inserts'] + 1):
 
                 if not args.debug and bar <= len_number_inserts:
-                    bar = bar + 1
                     print_progress_bar(
                         bar, len_number_inserts, prefix='Progress:', suffix='Complete', length=50)
+                    bar = bar + 1
 
                 sb.append("INSERT INTO %s(" % table['name'])
 
@@ -743,10 +746,12 @@ def main():
                 sb.append(_sb)
                 sb.append(");")
 
-                if args.insert:
+                if args.debug:
+                    print sb
 
+                if args.insert:
                     if args.debug:
-                        print sb
+                        print "\n[INSERT TABLE]: Executing query in the database"
 
                     cur.execute(sb.to_string())
 
