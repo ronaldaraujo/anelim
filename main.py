@@ -547,7 +547,6 @@ OUTPUT_MSSQL = "mssql.sql"
 def main():
     try:
         # TODO: Validar JSON
-        # config = json.loads(open('schema.json').read())
 
         args = argparse.ArgumentParser(
             description='Arguments')
@@ -573,9 +572,9 @@ def main():
             start_time = datetime.now()
 
         if args.file:
-            data = JsonObject(open(args.file).read())
+            data = JsonObject(open('schema/' + args.file).read())
         else:
-            data = JsonObject(open('schema.json').read())
+            data = JsonObject(open('schema/schema.json').read())
 
         sb = StringBuilder()
 
@@ -589,7 +588,7 @@ def main():
             try:
 
                 if args.target == 'postgres':
-                    data_conn = JsonObject(open('config_postgres.json').read())
+                    data_conn = JsonObject(open('config/config_postgres.json').read())
 
                     sb.append("dbname='%s' " % data_conn.dbname)
                     sb.append("user='%s' " % data_conn.user)
@@ -601,7 +600,7 @@ def main():
                     cur = conn.cursor()
 
                 else:
-                    data_conn = JsonObject(open('config_mssql.json').read())
+                    data_conn = JsonObject(open('config/config_mssql.json').read())
 
                     conn = pymssql.connect(data_conn.host, data_conn.user, data_conn.password, data_conn.dbname)
                     cur = conn.cursor()
@@ -616,7 +615,7 @@ def main():
 
         # Change file name if exist flag -d or --drop
         if args.out_file:
-            target = open(args.out_file, 'w')
+            target = open('output/' + args.out_file, 'w')
         else:
             if args.target == 'postgres':
                 target = open(OUTPUT_POSTGRES, 'w')
