@@ -1,0 +1,513 @@
+{
+    "tables": [
+        {
+            "number_inserts": 100,
+            "name": "Suppliers",
+            "fields": [
+                {
+                    "name": "SupplierID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CompanyName",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "ContactName",
+                    "type": "varchar",
+                    "constraint": 50,
+                    "null": false
+                },
+                {
+                    "name": "ContactTitle",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": true
+                },
+                {
+                    "name": "Address",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "City",
+                    "type": "varchar",
+                    "constraint": 150,
+                    "null": false
+                },
+                {
+                    "name": "Region",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": false
+                },
+                {
+                    "name": "PostalCode",
+                    "type": "varchar",
+                    "constraint": 20,
+                    "null": false
+                },
+                {
+                    "name": "Country",
+                    "type": "varchar",
+                    "constraint": 120,
+                    "null": false
+                },
+                {
+                    "name": "Phone",
+                    "type": "varchar",
+                    "constraint": 15,
+                    "null": true
+                },
+                {
+                    "name": "Fax",
+                    "type": "varchar",
+                    "constraint": 20,
+                    "null": true
+                },
+                {
+                    "name": "HomePage",
+                    "type": "varchar",
+                    "constraint": 200,
+                    "null": true
+                }
+            ]
+        },
+        {
+            "number_inserts": 50,
+            "name": "Categories",
+            "fields": [
+                {
+                    "name": "CategoryID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CategoryName",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "Description",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": true
+                },
+                {
+                    "name": "Picture",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": true
+                }
+            ]
+        },
+        {
+            "number_inserts": 30,
+            "name": "Products",
+            "fields": [
+                {
+                    "name": "ProductID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "SupplierID",
+                    "foreign_key": true,
+                    "reference_table": "Suppliers",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CategoryID",
+                    "foreign_key": true,
+                    "reference_table": "Suppliers",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "QuantityPerUnit",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "UnitPrice",
+                    "type": "numeric",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "UnitsInStock",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "UnitsOnOrder",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "ReorderLevel",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": true
+                },
+                {
+                    "name": "Discontinued",
+                    "type": "boolean",
+                    "null": false
+                }
+            ]
+        },
+        {
+            "number_inserts": 100,
+            "name": "Employees",
+            "fields": [
+                {
+                    "name": "EmployeeID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "LastName",
+                    "type": "varchar",
+                    "constraint": 50,
+                    "null": true
+                },
+                {
+                    "name": "FirstName",
+                    "type": "varchar",
+                    "constraint": 50,
+                    "null": false
+                },
+                {
+                    "name": "Title",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": false
+                },
+                {
+                    "name": "TitleOfCourtesy",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": true
+                },
+                {
+                    "name": "BirthDate",
+                    "type": "date",
+                    "null": false
+                },
+                {
+                    "name": "HireDate",
+                    "type": "date",
+                    "null": true
+                },
+                {
+                    "name": "Address",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "City",
+                    "type": "varchar",
+                    "constraint": 150,
+                    "null": false
+                },
+                {
+                    "name": "Region",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": false
+                },
+                {
+                    "name": "PostalCode",
+                    "type": "varchar",
+                    "constraint": 20,
+                    "null": false
+                },
+                {
+                    "name": "Country",
+                    "type": "varchar",
+                    "constraint": 120,
+                    "null": false
+                },
+                {
+                    "name": "HomePhone",
+                    "type": "varchar",
+                    "constraint": 15,
+                    "null": true
+                },
+                {
+                    "name": "Extension",
+                    "type": "varchar",
+                    "constraint": 25,
+                    "null": true
+                },
+                {
+                    "name": "Photo",
+                    "type": "varchar",
+                    "constraint": 50,
+                    "null": true
+                },
+                {
+                    "name": "Notes",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": true
+                },
+                {
+                    "name": "ReportsTo",
+                    "type": "varchar",
+                    "constraint": 50,
+                    "null": true
+                }
+            ]
+        },
+        {
+            "number_inserts": 45,
+            "name": "Customers",
+            "fields": [
+                {
+                    "name": "CustomerID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CompanyName",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "ContactName",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "ContactTitle",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": true
+                },
+                {
+                    "name": "Picture",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": true
+                },
+                {
+                    "name": "Address",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "City",
+                    "type": "varchar",
+                    "constraint": 150,
+                    "null": false
+                },
+                {
+                    "name": "Region",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": false
+                },
+                {
+                    "name": "PostalCode",
+                    "type": "varchar",
+                    "constraint": 20,
+                    "null": false
+                },
+                {
+                    "name": "Country",
+                    "type": "varchar",
+                    "constraint": 120,
+                    "null": false
+                },
+                {
+                    "name": "Phone",
+                    "type": "varchar",
+                    "constraint": 15,
+                    "null": true
+                },
+                {
+                    "name": "Fax",
+                    "type": "varchar",
+                    "constraint": 15,
+                    "null": true
+                }
+            ]
+        },
+        {
+            "number_inserts": 20,
+            "name": "OrderDetails",
+            "fields": [
+                {
+                    "name": "OrderID",
+                    "foreign_key": true,
+                    "reference_table": "Suppliers",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CategoryName",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": false
+                },
+                {
+                    "name": "Description",
+                    "type": "varchar",
+                    "constraint": 255,
+                    "null": true
+                },
+                {
+                    "name": "Picture",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": true
+                }
+            ]
+        },
+        {
+            "number_inserts": 20,
+            "name": "Orders",
+            "fields": [
+                {
+                    "name": "OrderID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CustomerID",
+                    "foreign_key": true,
+                    "reference_table": "Customers",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "EmployeeID",
+                    "foreign_key": true,
+                    "reference_table": "Employees",
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "OrderDate",
+                    "type": "date",
+                    "null": false
+                },
+                {
+                    "name": "RequeredDate",
+                    "type": "date",
+                    "null": true
+                },
+                {
+                    "name": "ShippedDate",
+                    "type": "date",
+                    "null": false
+                },
+                {
+                    "name": "ShipVia",
+                    "type": "varchar",
+                    "constraint": 10,
+                    "null": true
+                },
+                {
+                    "name": "Freight",
+                    "type": "varchar",
+                    "constraint": 10,
+                    "null": true
+                },
+                {
+                    "name": "ShipName",
+                    "type": "varchar",
+                    "constraint": 12,
+                    "null": true
+                },
+                {
+                    "name": "ShipAddress",
+                    "type": "varchar",
+                    "constraint": 12,
+                    "null": true
+                },
+                {
+                    "name": "ShipCity",
+                    "type": "varchar",
+                    "constraint": 10,
+                    "null": true
+                },
+                {
+                    "name": "ShipRegion",
+                    "type": "varchar",
+                    "constraint": 10,
+                    "null": true
+                },
+                {
+                    "name": "ShipPostalCode",
+                    "type": "varchar",
+                    "constraint": 10,
+                    "null": true
+                },
+                {
+                    "name": "ShipCountry",
+                    "type": "varchar",
+                    "constraint": 10,
+                    "null": true
+                }
+            ]
+        },
+        {
+            "number_inserts": 100,
+            "name": "Shippers",
+            "fields": [
+                {
+                    "name": "ShipperID",
+                    "primary_key": true,
+                    "type": "integer",
+                    "unsigned": true,
+                    "null": false
+                },
+                {
+                    "name": "CompanyName",
+                    "type": "varchar",
+                    "constraint": 100,
+                    "null": true
+                },
+                {
+                    "name": "Phone",
+                    "type": "varchar",
+                    "constraint": 15,
+                    "null": true
+                }
+            ]
+        }
+    ]
+}
