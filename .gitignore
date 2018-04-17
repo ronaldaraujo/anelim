@@ -101,5 +101,5 @@ ENV/
 .mypy_cache/
 
 output/
-schema/
-!schema/schema.json
+schema/*.json
+schema/!schema.json
